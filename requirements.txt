@@ -1,0 +1,2 @@
+# Jira Sprint Copilot - Core Dependencies
+pyyaml>=6.0.1

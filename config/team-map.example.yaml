@@ -1,0 +1,115 @@
+# Team Configuration Map for Jira Sprint Copilot
+# Copy this template to references/team-map.local.yaml and customize for your organization.
+
+board:
+  id: "1001"
+  project_keys:
+    - "ENG"
+    - "CORE"
+
+defaults:
+  dry_run: true
+  backlog_jql: "project in (ENG, CORE) AND statusCategory != Done AND sprint is EMPTY ORDER BY priority DESC, created ASC"
+  active_sprint_jql: "project in (ENG, CORE) AND sprint in openSprints() ORDER BY Rank ASC"
+  fields: "summary,status,assignee,priority,components,labels,updated,created,duedate"
+  stale_after_days: 3
+  standup_lookback_days: 1
+  blocked_statuses:
+    - "Blocked"
+    - "On Hold"
+  active_statuses:
+    - "In Progress"
+    - "In Review"
+    - "Testing"
+  done_statuses:
+    - "Done"
+    - "Closed"
+    - "Resolved"
+
+approval:
+  assignee_change_requires_approval: true
+  allow_apply_without_approval: false
+  assigning_authorities:
+    - name: "Alex Rivera"
+      jira_assignee: "alex.rivera@example.com"
+      scope:
+        - "ENG"
+        - "CORE"
+    - name: "Engineering Manager"
+      jira_assignee: "eng.manager@example.com"
+      scope:
+        - "ENG"
+        - "CORE"
+  audit_log: "automation/output/approvals.log"
+
+team:
+  - name: "Alex Rivera"
+    jira_assignee: "alex.rivera@example.com"
+    team: "Core Platform"
+    skills:
+      - "architecture"
+      - "backend"
+      - "distributed-systems"
+      - "leadership"
+    components:
+      - "API Gateway"
+      - "Auth Service"
+    labels:
+      - "backend"
+      - "platform"
+    max_in_progress: 3
+    sprint_capacity_points: 13
+    backup_assignee: "sam.chen@example.com"
+    unavailable_dates: []
+    assignment_allowlist: true
+
+  - name: "Sam Chen"
+    jira_assignee: "sam.chen@example.com"
+    team: "Core Platform"
+    skills:
+      - "backend"
+      - "database"
+      - "performance"
+    components:
+      - "API Gateway"
+      - "Database Cluster"
+    labels:
+      - "backend"
+      - "database"
+    max_in_progress: 2
+    sprint_capacity_points: 8
+    backup_assignee: "jordan.taylor@example.com"
+    unavailable_dates: []
+    assignment_allowlist: true
+
+  - name: "Jordan Taylor"
+    jira_assignee: "jordan.taylor@example.com"
+    team: "Core Platform"
+    skills:
+      - "qa"
+      - "automation-testing"
+      - "ci-cd"
+    components:
+      - "Test Harness"
+      - "Integration Pipeline"
+    labels:
+      - "qa"
+      - "automation"
+    max_in_progress: 2
+    sprint_capacity_points: 8
+    backup_assignee: "sam.chen@example.com"
+    unavailable_dates: []
+    assignment_allowlist: true
+
+rules:
+  ownership_order:
+    - "component"
+    - "label"
+    - "skill"
+    - "history"
+  never_auto_assign_labels:
+    - "security"
+    - "architecture"
+    - "needs-manager-review"
+    - "compliance"
+  cross_team_assignment_requires_approval: true

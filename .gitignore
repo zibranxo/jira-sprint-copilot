@@ -1,0 +1,38 @@
+# Jira Sprint Copilot - Git Ignore Rules
+
+# Local team configuration (contains actual team member names, emails, and sensitive keys)
+config/team-map.local.yaml
+team-map.local.yaml
+
+# Local environment variables and secrets
+.env
+.env.local
+*.env
+
+# Generated operational outputs and audit logs
+scripts/output/*.md
+scripts/output/*.log
+automation/output/*.md
+automation/output/*.log
+output/*.md
+output/*.log
+!scripts/output/.gitkeep
+!automation/output/.gitkeep
+
+# Python virtual environments & bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+.venv*/
+venv/
+ENV/
+env/
+
+# IDE & OS files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo

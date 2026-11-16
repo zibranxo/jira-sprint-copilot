@@ -1,0 +1,14 @@
+# Jira Sprint Copilot - Example Automation Cron Schedules
+# Commands execute in dry-run mode by default. Adjust board IDs, sprint IDs, paths, and project keys before use.
+
+# Monday 09:00 - Shape scope proposal for upcoming sprint cycle
+0 9 * * 1 cd /opt/sprint-automation && python copilot.py shape --board-id 1001 --project-key ENG >> /var/log/jira-copilot-shape.log 2>&1
+
+# Monday-Friday 09:30 - Generate daily standup brief and progress pulse
+30 9 * * 1-5 cd /opt/sprint-automation && python copilot.py standup --board-id 1001 --sprint-id 2002 >> /var/log/jira-copilot-standup.log 2>&1
+
+# Tuesday & Thursday 16:00 - Surface in-flight delivery risks and bottleneck tickets
+0 16 * * 2,4 cd /opt/sprint-automation && python copilot.py risk --board-id 1001 --sprint-id 2002 >> /var/log/jira-copilot-risks.log 2>&1
+
+# Friday 17:00 - Generate retrospective analytical notes upon sprint closure
+0 17 * * 5 cd /opt/sprint-automation && python copilot.py retro --board-id 1001 --sprint-id 2002 >> /var/log/jira-copilot-retro.log 2>&1
